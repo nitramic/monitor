@@ -1,0 +1,16 @@
+## para generar los worktrees en el repo
+
+git worktree add -b main .\influxDB InfluxDB
+git worktree add -b Influx .\influxDB
+git worktree add -b Telegraf .\Telegraf
+git worktree add -b Grafana .\Grafana
+git worktree add -b Docker .\Docker
+
+
+## Para ver los worktrees en el repo
+git worktree list
+
+git worktree prune
+
+Luego de hacer cualquier update se ve asi las publicaciones
+![Commits](commits.png)
