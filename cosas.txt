@@ -1,0 +1,3 @@
+https://unix.stackexchange.com/questions/123103/how-to-keep-bash-running-after-command-execution
+
+https://stackoverflow.com/questions/73053406/docker-volume-rename-or-copy-operation
