@@ -47,3 +47,10 @@ https://blog.lawrencejones.dev/building-a-postgresql-load-tester/
 https://hackernoon.com/how-to-create-and-load-test-data-in-postgresql-i41e353m
 https://sunnykichloo.wordpress.com/2022/07/29/postgresql-database-stress-testing-using-pgbench/
 
+# Ver
+https://manpages.ubuntu.com/manpages/trusty/man1/pg_activity.1.html
+https://pganalyze.com/blog/5mins-postgres-high-cpu-utilization-explain-plans-linux-perf
+https://dba.stackexchange.com/questions/44084/troubleshooting-high-cpu-usage-from-postgres-and-postmaster-services
+## Tracing SQL queries
+https://www.keyvanfatehi.com/2022/12/22/how-to-trace-postgresql-database-sql-queries/
+https://www.postgresql.org/docs/current/dynamic-trace.html
