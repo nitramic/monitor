@@ -29,3 +29,10 @@ https://community.influxdata.com/t/multiple-telegraf-configs/245/4
 
 para envio de datos a multiple telegraf databases
 https://github.com/influxdata/telegraf/issues/809
+
+
+## Otro, como stremear telegraf hacia grafana Live
+https://grafana.com/blog/2021/08/16/streaming-real-time-telegraf-metrics-using-grafana-live/
+https://grafana.com/tutorials/stream-metrics-from-telegraf-to-grafana/
+## Monitoreo de Postgres via telegraf hacia Grafana
+https://www.influxdata.com/blog/monitoring-your-postgresql-database-with-telegraf-and-influxdb/
