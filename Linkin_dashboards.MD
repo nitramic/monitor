@@ -1,0 +1,1 @@
+https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/manage-dashboard-links/#:~:text=Add%20links%20to%20dashboards&text=In%20Type%2C%20select%20dashboards.,links%20to%20all%20other%20dashboards.
