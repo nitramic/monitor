@@ -14,6 +14,7 @@ https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md#secret-
 ## Documentation
 https://docs.influxdata.com/telegraf/v1.27/
 https://university.influxdata.com/courses/data-collection-with-telegraf-tutorial/
+https://sweetcode.io/set-up-telegraf-influxdb-and-grafana-with-docker-compose/
 
 ## Como Funciona los plugins de telegraf para ejecutar comandos externos al momento de colectar datos exec & execd
 https://www.influxdata.com/blog/plugin-spotlight-exec-execd/
@@ -36,3 +37,15 @@ https://grafana.com/blog/2021/08/16/streaming-real-time-telegraf-metrics-using-g
 https://grafana.com/tutorials/stream-metrics-from-telegraf-to-grafana/
 ## Monitoreo de Postgres via telegraf hacia Grafana
 https://www.influxdata.com/blog/monitoring-your-postgresql-database-with-telegraf-and-influxdb/
+
+################### Implementacion ###################
+Hacer un pull de la imagen de Telegraf
+user@docker01:~$ mkdir telegraf
+
+Comando para generar archivo de config de telegraf
+user@docker01:~$ docker run --rm telegraf -sample-config > telegraf/telegraf.conf
+
+Descomentamos lo que necesitamos monitorear y las config que enviamos
+EJ Input/Output/Etc
+
+Luego ejecutamos el contenedo con todo lo que necesitamos ya configurado
