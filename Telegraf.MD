@@ -72,4 +72,13 @@ EJ:.
     /etc/telegraf/telegraf.d/inputs.diskio.conf
     /etc/telegraf/telegraf.d/inputs.kernel.conf
     /etc/telegraf/telegraf.d/outputs.influxdb.conf
+--> https://medium.com/@yangcar/telegraf-with-multiple-configurations-247b8bb499f9
+    https://community.influxdata.com/t/how-to-put-multiple-telegraf-config-files-in-telegraf-service/22162/4
 
+Como generar files de configuracion (con filtros) para las diferentes implementaciones de monitoreo
+- Simplemente llamando al ejecutable con los filtros y el comando config, se genera una salida del file.
+EJ:.
+telegraf --input-filter cpu:mem:net:swap  --output-filter influxdb_v2: config > telegraf.in_localhost-out_influxv2.conf
+Mas Info:
+        https://docs.influxdata.com/telegraf/v1.9/administration/configuration/
+        https://docs.influxdata.com/telegraf/v1.9/plugins/outputs/
