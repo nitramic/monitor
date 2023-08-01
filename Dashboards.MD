@@ -52,3 +52,7 @@ Please restart Grafana after installing or removing plugins. Refer to Grafana do
 ###########
 Para este caso es un dashboard de hostmap
 ###########
+
+Nota:
+    Revisar al hacer el export para que los dashboards soliciten fuente de datos, asi es mas facil la integracion en nuevos ambientes
+    
