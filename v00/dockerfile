@@ -1,6 +1,6 @@
 FROM telegraf as telegraf
 COPY ./scripts /etc/telegraf/
-COPY ./configs/telegraf.conf /etc/telegraf/
+COPY telegraf.conf /etc/telegraf/
 RUN apt update
 RUN apt upgrade -y
 RUN apt install python -y

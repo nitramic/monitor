@@ -49,3 +49,27 @@ Descomentamos lo que necesitamos monitorear y las config que enviamos
 EJ Input/Output/Etc
 
 Luego ejecutamos el contenedo con todo lo que necesitamos ya configurado
+
+########### Otro tipo de implementacion ########### (Probar)
+se pueden dejar como varias instancias de telegraf corriendo para que colecte datos
+En mi caso seria por ejemplo vmware para realtime cada 5 o 10 sec y las otras metricas que serian 
+mas para analisis en ventanas de tiempo mas largas para ver su "evolucion" (?) cada 1min
+
+como a su vez levantar metricas con un script, como en este caso, uno de python que toma mas datos de 
+postgres que el propio agente de telegraf cada 30 segundos.
+
+todo eso metido en el directorio ./conf de telegraf, para que cuando levante va a buscar y aplicar
+todos los archivos .conf que encuentre en ese directorio.
+
+Nota de correccion:
+Eliminar o comentar todos los plugins en el file /etc/telegraf/telegraf.conf, seteando solamente la entrada [agent] 
+y [global_tags].
+
+Crear un archivo para cada plugin de [imput] y otro para cada plugin de [output] y colocarlos dentro del directorio
+/etc/telegraf/telegraf.d
+EJ:.
+    /etc/telegraf/telegraf.d/inputs.disk.conf
+    /etc/telegraf/telegraf.d/inputs.diskio.conf
+    /etc/telegraf/telegraf.d/inputs.kernel.conf
+    /etc/telegraf/telegraf.d/outputs.influxdb.conf
+
