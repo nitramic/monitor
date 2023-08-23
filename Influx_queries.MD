@@ -790,3 +790,151 @@ Por lo cual el Grafana, aplicaba el filtro y no lo mostraba (Cosa que esta bien)
 
 Me di cuenta 2hs depues de borrar la data :P
 
+### #################################### ###
+### Select para lista de hosts y estados ###
+### #################################### ###
+
+> SHOW TAG VALUES FROM "system" WITH KEY="host"
+name: system
+key  value
+---  -----
+host LYCOMPANY-APP
+host MOLAJONI-APP
+host MOSCATELLI-ERP
+host SICAPP
+host boozers-app
+host gronchiapp
+host headuvm
+host ideapa-app
+host infolamp
+host lelodue-app
+host marcolinilinux
+host mecelp-app
+host moscatellilinux
+host santostefano-ec
+host ubuntuvm
+host zenithapp
+
+
+###
+/.*-(?<text>.*)-(?<value>.*)-.*/
+###
+
+/host="(?<text>[^"]*)/
+
+
+###
+Otro? 
+SHOW TAG VALUES WITH KEY="host"
+
+SELECT * FROM cpu WHERE ("cpu"='cpu-total' AND "host"='infomonitor') LIMIT 10
+
+SELECT * FROM cpu WHERE "cpu"='cpu-total' LIMIT 10
+SELECT "usage_iowait"  FROM cpu WHERE "cpu"='cpu-total' LIMIT 10
+SELECT usage_system,usage_user FROM cpu WHERE "cpu"='cpu-total' LIMIT 5
+SELECT host,usage_system,usage_user FROM cpu WHERE "cpu"='cpu-total' LIMIT 5
+### 
+SELECT host,MAX(usage_system),usage_user FROM cpu WHERE "cpu"='cpu-total'
+name: cpu
+time                host          max               usage_user
+----                ----          ---               ----------
+1691995521000000000 NB-SVILUPPO99 90.06129597197898 9.763572679509632
+###
+SELECT host,LAST(usage_system),usage_user FROM cpu WHERE "cpu"='cpu-total'
+name: cpu
+time                host        last                usage_user
+----                ----        ----                ----------
+1692801211000000000 infomonitor 0.24894199651504736 0.8961911874541705
+###
+SELECT host,usage_system,usage_user FROM cpu WHERE "cpu"='cpu-total'
+###
+
+SELECT host,usage_system,usage_user FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host" LIMIT 5
+name: cpu
+tags: host=NB-SVILUPPO99
+time                host          usage_system       usage_user
+----                ----          ------------       ----------
+1691750311000000000 NB-SVILUPPO99 3.4892638036809815 2.147239263803681
+1691750322000000000 NB-SVILUPPO99 12.215477996965099 5.007587253414264
+1691750332000000000 NB-SVILUPPO99 17.313432835820894 16.30597014925373
+1691750342000000000 NB-SVILUPPO99 11.902927580893683 14.252696456086287
+1691750350000000000 NB-SVILUPPO99 10.076775431861805 15.4510556621881
+
+name: cpu
+tags: host=infomonitor
+time                host        usage_system        usage_user
+----                ----        ------------        ----------
+1692357182000000000 infomonitor 0.3890104546559511  0.6807682956478022
+1692357193000000000 infomonitor 0.33914728682171635 1.0174418604651836
+1692357201000000000 infomonitor 0.17436791630334778 0.34873583260677815
+1692357211000000000 infomonitor 0.2562788313685718  0.1793951819579675
+1692357220000000000 infomonitor 0.16339869281045852 0.354030501089301
+
+name: cpu
+tags: host=test
+time                host usage_system        usage_user
+----                ---- ------------        ----------
+1691762382000000000 test 0.205973223480933   0.1029866117404665
+1691762391000000000 test 0.22371364653217674 0.335570469798901
+1691762402000000000 test 0.09460737937598052 0.09460737937544274
+1691762410000000000 test 0.24783147459772772 0.12391573729886386
+1691762420000000000 test 0.29411764705822036 0.1960784313721469
+
+######
+SELECT host,usage_system,usage_user FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host" LIMIT 5
+###
+
+SELECT LAST(*) FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+name: cpu
+tags: host=NB-SVILUPPO99
+time last_usage_guest last_usage_guest_nice last_usage_idle   last_usage_iowait last_usage_irq last_usage_nice last_usage_softirq last_usage_steal last_usage_system last_usage_user
+---- ---------------- --------------------- ---------------   ----------------- -------------- --------------- ------------------ ---------------- ----------------- ---------------
+0    0                0                     85.91331269349845 0                 0              0               0                  0                5.185758513931889 8.90092879256966
+
+name: cpu
+tags: host=infomonitor
+time last_usage_guest last_usage_guest_nice last_usage_idle   last_usage_iowait   last_usage_irq last_usage_nice last_usage_softirq last_usage_steal last_usage_system   last_usage_user
+---- ---------------- --------------------- ---------------   -----------------   -------------- --------------- ------------------ ---------------- -----------------   ---------------
+0    0                0                     99.64683509882947 0.02716653083394655 0              0               0.0543330616678931 0                0.13583265416911505 0.13583265417035043
+
+name: cpu
+tags: host=test
+time last_usage_guest last_usage_guest_nice last_usage_idle   last_usage_iowait last_usage_irq last_usage_nice last_usage_softirq last_usage_steal last_usage_system   last_usage_user
+---- ---------------- --------------------- ---------------   ----------------- -------------- --------------- ------------------ ---------------- -----------------   ---------------
+0    0                0                     99.41002949911599 0                 0              0               0                  0                0.19665683382623728 0.39331366765247455
+
+### Otra Formula ##
+100 - last_usage_idle da el valor de [100 - 99.603] = 0.397 
+last_usage_system + last_usage_user [0.138+0.166] = 0.396
+### ### ###
+SELECT LAST(*) FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+
+# ###### BACKUP ######
+
+##############
+root@infomonitor:/var/lib/influxdb/bkp# pwd
+/var/lib/influxdb/bkp
+##############
+
+root@infomonitor:/var/lib/influxdb/bkp# influx
+Connected to http://localhost:8086 version 1.8.10
+InfluxDB shell version: 1.8.10
+> influxf backup
+ERR: error parsing query: found influxf, expected SELECT, DELETE, SHOW, CREATE, DROP, EXPLAIN, GRANT, REVOKE, ALTER, SET, KILL at line 1, char 1
+Warning: It is possible this error is due to not setting a database.
+Please set a database with the command "use <database>".
+> exit
+root@infomonitor:/var/lib/influxdb/bkp# influxd
+
+ 8888888           .d888 888                   8888888b.  888888b.
+   888            d88P"  888                   888  "Y88b 888  "88b
+   888            888    888                   888    888 888  .88P
+   888   88888b.  888888 888 888  888 888  888 888    888 8888888K.
+   888   888 "88b 888    888 888  888  Y8bd8P' 888    888 888  "Y88b
+   888   888  888 888    888 888  888   X88K   888    888 888    888
+   888   888  888 888    888 Y88b 888 .d8""8b. 888  .d88P 888   d88P
+ 8888888 888  888 888    888  "Y88888 888  888 8888888P"  8888888P"
+
+2023-08-23T15:17:00.941748Z     info    InfluxDB starting       {"log_id": "0jpkNHZG000", "version": "1.8.10", "branch": "1.8", "commit": "688e697c51fd"}
+2023-08-23T15:17:00.941917Z     info    Go runtime      {"log_id": "0jpkNHZG000", "version": "go1.13.8", "maxprocs": 4}
+run: open server: listen: listen tcp 127.0.0.1:8088: bind: address already in use
