@@ -906,8 +906,354 @@ time last_usage_guest last_usage_guest_nice last_usage_idle   last_usage_iowait 
 ### Otra Formula ##
 100 - last_usage_idle da el valor de [100 - 99.603] = 0.397 
 last_usage_system + last_usage_user [0.138+0.166] = 0.396
-### ### ###
+### NO ###
+
+# Aca la exploratoria
+## Iniciando la exploratoria
+
+
+Luego de seleccionar la base y listar los TAGS y los KEY VaLUES (?)
+
+> SHOW DATABASES
+name: databases
+name
+----
+_internal
+telegraf
+Clients
+Infra
+Clients_XLR
+> USE Clients
+Using database Clients
+
+Uso SHOW SERIES para conocer que datos se estan guardando, como es una base chica puedo jugar con estos valores
+
+> SHOW SERIES
+key
+---
+cpu,cpu=cpu-total,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+cpu,cpu=cpu-total,dc=Cloud,host=MOLAJONI-APP,os=Windows
+cpu,cpu=cpu-total,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+cpu,cpu=cpu-total,dc=Cloud,host=SICAPP,os=Windows
+cpu,cpu=cpu-total,dc=Cloud,host=boozers-app,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=gronchiapp,os=Windows
+cpu,cpu=cpu-total,dc=Cloud,host=headuvm,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=ideapa-app,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=infolamp,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=lelodue-app,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=marcolinilinux,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=mecelp-app,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=moscatellilinux,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=santostefano-ec,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=ubuntuvm,os=Linux
+cpu,cpu=cpu-total,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+cpu,cpu=cpu0,dc=Cloud,host=MOLAJONI-APP,os=Windows
+cpu,cpu=cpu0,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+cpu,cpu=cpu0,dc=Cloud,host=SICAPP,os=Windows
+cpu,cpu=cpu0,dc=Cloud,host=boozers-app,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=gronchiapp,os=Windows
+cpu,cpu=cpu0,dc=Cloud,host=headuvm,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=ideapa-app,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=infolamp,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=lelodue-app,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=marcolinilinux,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=mecelp-app,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=moscatellilinux,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=santostefano-ec,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=ubuntuvm,os=Linux
+cpu,cpu=cpu0,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+cpu,cpu=cpu1,dc=Cloud,host=MOLAJONI-APP,os=Windows
+cpu,cpu=cpu1,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+cpu,cpu=cpu1,dc=Cloud,host=SICAPP,os=Windows
+cpu,cpu=cpu1,dc=Cloud,host=boozers-app,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=gronchiapp,os=Windows
+cpu,cpu=cpu1,dc=Cloud,host=headuvm,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=ideapa-app,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=lelodue-app,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=marcolinilinux,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=mecelp-app,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=moscatellilinux,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=santostefano-ec,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=ubuntuvm,os=Linux
+cpu,cpu=cpu1,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=MOLAJONI-APP,os=Windows
+cpu,cpu=cpu2,dc=Cloud,host=headuvm,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=ideapa-app,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=lelodue-app,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=marcolinilinux,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=santostefano-ec,os=Linux
+cpu,cpu=cpu2,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=MOLAJONI-APP,os=Windows
+cpu,cpu=cpu3,dc=Cloud,host=headuvm,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=ideapa-app,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=lelodue-app,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=marcolinilinux,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=santostefano-ec,os=Linux
+cpu,cpu=cpu3,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu4,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu5,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu6,dc=Cloud,host=zenithapp,os=Linux
+cpu,cpu=cpu7,dc=Cloud,host=zenithapp,os=Linux
+disk,dc=Cloud,device=C:,fstype=NTFS,host=LYCOMPANY-APP,mode=rw,os=Windows,path=\C:
+disk,dc=Cloud,device=C:,fstype=NTFS,host=MOLAJONI-APP,mode=rw,os=Windows,path=\C:
+disk,dc=Cloud,device=C:,fstype=NTFS,host=MOSCATELLI-ERP,mode=rw,os=Windows,path=\C:
+disk,dc=Cloud,device=C:,fstype=NTFS,host=SICAPP,mode=rw,os=Windows,path=\C:
+disk,dc=Cloud,device=C:,fstype=NTFS,host=gronchiapp,mode=rw,os=Windows,path=\C:
+disk,dc=Cloud,device=D:,fstype=NTFS,host=LYCOMPANY-APP,mode=rw,os=Windows,path=\D:
+disk,dc=Cloud,device=D:,fstype=NTFS,host=MOLAJONI-APP,mode=rw,os=Windows,path=\D:
+disk,dc=Cloud,device=E:,fstype=NTFS,host=MOSCATELLI-ERP,mode=rw,os=Windows,path=\E:
+disk,dc=Cloud,device=sda2,fstype=ext4,host=boozers-app,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=headuvm,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=ideapa-app,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=infolamp,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=lelodue-app,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=marcolinilinux,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=mecelp-app,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=moscatellilinux,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=santostefano-ec,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=ubuntuvm,mode=rw,os=Linux,path=/
+disk,dc=Cloud,device=sda2,fstype=ext4,host=zenithapp,mode=rw,os=Linux,path=/
+kernel,dc=Cloud,host=boozers-app,os=Linux
+kernel,dc=Cloud,host=headuvm,os=Linux
+kernel,dc=Cloud,host=ideapa-app,os=Linux
+kernel,dc=Cloud,host=infolamp,os=Linux
+kernel,dc=Cloud,host=lelodue-app,os=Linux
+kernel,dc=Cloud,host=marcolinilinux,os=Linux
+kernel,dc=Cloud,host=mecelp-app,os=Linux
+kernel,dc=Cloud,host=moscatellilinux,os=Linux
+kernel,dc=Cloud,host=santostefano-ec,os=Linux
+kernel,dc=Cloud,host=ubuntuvm,os=Linux
+kernel,dc=Cloud,host=zenithapp,os=Linux
+mem,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+mem,dc=Cloud,host=MOLAJONI-APP,os=Windows
+mem,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+mem,dc=Cloud,host=SICAPP,os=Windows
+mem,dc=Cloud,host=boozers-app,os=Linux
+mem,dc=Cloud,host=gronchiapp,os=Windows
+mem,dc=Cloud,host=headuvm,os=Linux
+mem,dc=Cloud,host=ideapa-app,os=Linux
+mem,dc=Cloud,host=infolamp,os=Linux
+mem,dc=Cloud,host=lelodue-app,os=Linux
+mem,dc=Cloud,host=marcolinilinux,os=Linux
+mem,dc=Cloud,host=mecelp-app,os=Linux
+mem,dc=Cloud,host=moscatellilinux,os=Linux
+mem,dc=Cloud,host=santostefano-ec,os=Linux
+mem,dc=Cloud,host=ubuntuvm,os=Linux
+mem,dc=Cloud,host=zenithapp,os=Linux
+net,dc=Cloud,host=LYCOMPANY-APP,interface=Ethernet0\ 2,os=Windows
+net,dc=Cloud,host=MOLAJONI-APP,interface=Ethernet0\ 2,os=Windows
+net,dc=Cloud,host=MOSCATELLI-ERP,interface=Ethernet0\ 2,os=Windows
+net,dc=Cloud,host=SICAPP,interface=Ethernet0\ 2,os=Windows
+net,dc=Cloud,host=boozers-app,interface=all,os=Linux
+net,dc=Cloud,host=boozers-app,interface=ens192,os=Linux
+net,dc=Cloud,host=gronchiapp,interface=Ethernet0\ 4,os=Windows
+net,dc=Cloud,host=headuvm,interface=all,os=Linux
+net,dc=Cloud,host=headuvm,interface=ens192,os=Linux
+net,dc=Cloud,host=ideapa-app,interface=all,os=Linux
+net,dc=Cloud,host=ideapa-app,interface=ens192,os=Linux
+net,dc=Cloud,host=infolamp,interface=all,os=Linux
+net,dc=Cloud,host=infolamp,interface=ens192,os=Linux
+net,dc=Cloud,host=lelodue-app,interface=all,os=Linux
+net,dc=Cloud,host=lelodue-app,interface=ens192,os=Linux
+net,dc=Cloud,host=marcolinilinux,interface=all,os=Linux
+net,dc=Cloud,host=marcolinilinux,interface=ens160,os=Linux
+net,dc=Cloud,host=mecelp-app,interface=all,os=Linux
+net,dc=Cloud,host=mecelp-app,interface=ens192,os=Linux
+net,dc=Cloud,host=moscatellilinux,interface=all,os=Linux
+net,dc=Cloud,host=moscatellilinux,interface=ens160,os=Linux
+net,dc=Cloud,host=santostefano-ec,interface=all,os=Linux
+net,dc=Cloud,host=santostefano-ec,interface=ens192,os=Linux
+net,dc=Cloud,host=ubuntuvm,interface=all,os=Linux
+net,dc=Cloud,host=ubuntuvm,interface=ens160,os=Linux
+net,dc=Cloud,host=zenithapp,interface=all,os=Linux
+net,dc=Cloud,host=zenithapp,interface=ens192,os=Linux
+processes,dc=Cloud,host=boozers-app,os=Linux
+processes,dc=Cloud,host=headuvm,os=Linux
+processes,dc=Cloud,host=ideapa-app,os=Linux
+processes,dc=Cloud,host=infolamp,os=Linux
+processes,dc=Cloud,host=lelodue-app,os=Linux
+processes,dc=Cloud,host=marcolinilinux,os=Linux
+processes,dc=Cloud,host=mecelp-app,os=Linux
+processes,dc=Cloud,host=moscatellilinux,os=Linux
+processes,dc=Cloud,host=santostefano-ec,os=Linux
+processes,dc=Cloud,host=ubuntuvm,os=Linux
+processes,dc=Cloud,host=zenithapp,os=Linux
+swap,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+swap,dc=Cloud,host=MOLAJONI-APP,os=Windows
+swap,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+swap,dc=Cloud,host=SICAPP,os=Windows
+swap,dc=Cloud,host=boozers-app,os=Linux
+swap,dc=Cloud,host=gronchiapp,os=Windows
+swap,dc=Cloud,host=headuvm,os=Linux
+swap,dc=Cloud,host=ideapa-app,os=Linux
+swap,dc=Cloud,host=infolamp,os=Linux
+swap,dc=Cloud,host=lelodue-app,os=Linux
+swap,dc=Cloud,host=marcolinilinux,os=Linux
+swap,dc=Cloud,host=mecelp-app,os=Linux
+swap,dc=Cloud,host=moscatellilinux,os=Linux
+swap,dc=Cloud,host=santostefano-ec,os=Linux
+swap,dc=Cloud,host=ubuntuvm,os=Linux
+swap,dc=Cloud,host=zenithapp,os=Linux
+system,dc=Cloud,host=LYCOMPANY-APP,os=Windows
+system,dc=Cloud,host=MOLAJONI-APP,os=Windows
+system,dc=Cloud,host=MOSCATELLI-ERP,os=Windows
+system,dc=Cloud,host=SICAPP,os=Windows
+system,dc=Cloud,host=boozers-app,os=Linux
+system,dc=Cloud,host=gronchiapp,os=Windows
+system,dc=Cloud,host=headuvm,os=Linux
+system,dc=Cloud,host=ideapa-app,os=Linux
+system,dc=Cloud,host=infolamp,os=Linux
+system,dc=Cloud,host=lelodue-app,os=Linux
+system,dc=Cloud,host=marcolinilinux,os=Linux
+system,dc=Cloud,host=mecelp-app,os=Linux
+system,dc=Cloud,host=moscatellilinux,os=Linux
+system,dc=Cloud,host=santostefano-ec,os=Linux
+system,dc=Cloud,host=ubuntuvm,os=Linux
+system,dc=Cloud,host=zenithapp,os=Linux
+
+De aca me interesa saber en este caso el uso de CPU para mis Clientes en el Cloud, por eso todos los agentes que envian datos meten la data en esta base.
+Empiezo a explorar que datos me devuelve de cpu, por eso comienzo a aprender InfluxQL para ver que datos me devuelve
+En este caso selecciono los datos con el tag "cpu" identificado con 'cpu-total' ya que tambien el agente envia los datos de carga por cada uno de los cpu
+EJ.:
+cpu=cpu-total
+cpu=cpu0
+cpu=cpu1
+
+ya algunas de las vm tienen hasta 8 cpus configurados. :P
+como son datos que se cargan aleatoriamente, segun el orden de llegada organizo la data en el query con el GROUP BY, tomando el TAG "host"
+(Uso el LIMIT sino la cantidad de datos es un monton, envia toda la data que tiene la base)
+SELECT * FROM cpu WHERE "cpu"='cpu-total' LIMIT 20
+
+Esto me permite que los valores los vea por cada una de las vm's instaladas que envian sus datos a la base
+
+Con el LAST, puedo ver el ultimo dato enviado y con el GROUP BY uso el TAG "host" para que me ordene la data por cada uno de las vm's
+
 SELECT LAST(*) FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+
+Ya logrado el cometido de ver la data uso el condicional LAST y el campo que me interesa, en este caso usage_idle, ya que el agente me envia la data del uso de CPU por
+parte del usuario y del sistema. pero lo tendria que sumar, aca si bien debo usar otra formula matematica con usage_idle tengo resuelto de cuanto CPU me queda y lo revierto para 
+tener el uso total, ademas que esto tambien aplica para los Windows, con el otro formato creo que no funcionaba.
+
+SELECT LAST(usage_idle) FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+
+y el query final con la data que necesito (aplicando la formula matematica) es este!:
+
+SELECT LAST(usage_idle)  * -1 + 100 FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+
+### ###########################
+> SELECT LAST(usage_idle)  * -1 + 100 FROM cpu WHERE "cpu"='cpu-total' GROUP BY "host"
+name: cpu
+tags: host=LYCOMPANY-APP
+time                last
+----                ----
+1692863682000000000 3.2591414944356103
+
+name: cpu
+tags: host=MOLAJONI-APP
+time                last
+----                ----
+1692863691000000000 2.3943661971831034
+
+name: cpu
+tags: host=MOSCATELLI-ERP
+time                last
+----                ----
+1692863682000000000 7.903225806451616
+
+name: cpu
+tags: host=SICAPP
+time                last
+----                ----
+1692863691000000000 1.543739279588337
+
+name: cpu
+tags: host=boozers-app
+time                last
+----                ----
+1692863691000000000 10.207253884757733
+
+name: cpu
+tags: host=gronchiapp
+time                last
+----                ----
+1692863692000000000 2.3972602739726057
+
+name: cpu
+tags: host=headuvm
+time                last
+----                ----
+1692863682000000000 29.113924049742792
+
+name: cpu
+tags: host=ideapa-app
+time                last
+----                ----
+1692863682000000000 1.1657142859954632
+
+name: cpu
+tags: host=infolamp
+time                last
+----                ----
+1692863693000000000 2.01005025079769
+
+name: cpu
+tags: host=lelodue-app
+time                last
+----                ----
+1692863683000000000 0.6351292160234436
+
+name: cpu
+tags: host=marcolinilinux
+time                last
+----                ----
+1692863682000000000 2.4673851367241326
+
+name: cpu
+tags: host=mecelp-app
+time                last
+----                ----
+1692863692000000000 1.620029455437873
+
+name: cpu
+tags: host=moscatellilinux
+time                last
+----                ----
+1692863692000000000 1.8528321868678859
+
+name: cpu
+tags: host=santostefano-ec
+time                last
+----                ----
+1692863692000000000 0.3032600481227661
+
+name: cpu
+tags: host=ubuntuvm
+time                last
+----                ----
+1692863693000000000 1.3201320144186184
+
+name: cpu
+tags: host=zenithapp
+time                last
+----                ----
+1692863681000000000 0.21049466055900723
+ ### #####################################
+ y en grafana se ve asi
+
+ ![Grafana](hosts.png)
+
+### DISCO 
+SELECT * FROM disk GROUP BY "host" LIMIT 10
+
+> SELECT LAST(used_percent) FROM disk GROUP BY "device","host"
+
+### MEMORIA
+
+SELECT LAST(used_percent) FROM mem GROUP BY "host"
+
+
 
 # ###### BACKUP ######
 
