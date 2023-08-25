@@ -26,7 +26,7 @@ SELECT top("used_percent", 3) FROM "mem" WHERE $timeFilter GROUP BY time($__inte
 ## Disco
 ### Nuevamente, ocurre lo mismo
 
-### Antes 
+### Antes: 
 SELECT top("used_percent", 3) FROM "autogen"."disk" WHERE ("dc"::tag = 'Cloud') AND $timeFilter GROUP BY time($__interval) fill(null)
 ![Disco v.01](diskv01.png)
 
