@@ -1,0 +1,3784 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_VSPHERE",
+      "label": "vsphere",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.3"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "VMware vSphere Dashboard (Grafana 7.5 / new Time-Series Panel)",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 8159,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "vSphere Telegraf"
+      ],
+      "targetBlank": true,
+      "title": "More Dashboards",
+      "type": "dashboards"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 61,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Cluster Status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0.001
+              },
+              {
+                "color": "#1F60C4",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "vCenter Summary"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ESXi Summary"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VM Summary"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datastore Summary"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cluster Summary"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "locale"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 142,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "alias": "vCenter Summary",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT count(distinct(\"vcenter\")) AS \"vCenter\" FROM (SELECT \"overhead_average\", \"vcenter\" FROM  \"vsphere_cluster_mem\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Cluster Summary",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT count(distinct(\"clustername\")) AS \"Cluster\"  FROM (SELECT \"totalmhz_average\", \"clustername\" FROM  \"vsphere_cluster_cpu\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "ESXi Summary",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT count(distinct(\"esxhostname\")) AS \"ESXi\" FROM (SELECT \"coreUtilization_average\", \"esxhostname\" FROM  \"vsphere_host_cpu\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "VM Summary",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT count(distinct(\"vmname\")) AS \"VM\" FROM (SELECT \"usage_average\", \"vmname\" FROM  \"vsphere_vm_cpu\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Datastore Summary",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT count(distinct(\"dsname\")) AS \"Datastore\" FROM (SELECT \"capacity_latest\", \"dsname\" FROM  \"vsphere_datastore_disk\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "vSphere Overview",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0.001
+              },
+              {
+                "color": "#1F60C4",
+                "value": 0.002
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 13,
+        "x": 0,
+        "y": 5
+      },
+      "id": 28,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "repeat": "clustername",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_sys",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"uptime_latest\") AS \"Uptime\" FROM \"vsphere_host_sys\" WHERE (\"vcenter\" =~ /^$vcenter$/ AND \"clustername\" =~ /^$clustername$/) AND $timeFilter GROUP BY time($inter) fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "uptime_latest"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "Uptime"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "vcenter",
+              "operator": "=~",
+              "value": "/^$vcenter$/"
+            },
+            {
+              "condition": "AND",
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_cpu",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE (\"vcenter\" =~ /^$vcenter$/ AND \"clustername\" =~ /^$clustername$/) AND $timeFilter GROUP BY time($inter) fill(none)",
+          "rawQuery": false,
+          "refId": "D",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "CPU Usage"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "vcenter",
+              "operator": "=~",
+              "value": "/^$vcenter$/"
+            },
+            {
+              "condition": "AND",
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cpu",
+              "operator": "=",
+              "value": "instance-total"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_mem",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE (\"vcenter\" =~ /^$vcenter$/ AND \"clustername\" =~ /^$clustername$/) AND $timeFilter GROUP BY time($inter) fill(none)",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "RAM Usage"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "vcenter",
+              "operator": "=~",
+              "value": "/^$vcenter$/"
+            },
+            {
+              "condition": "AND",
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        }
+      ],
+      "title": "$clustername Overview",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-yellow",
+                "value": 65
+              },
+              {
+                "color": "dark-orange",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 11,
+        "x": 13,
+        "y": 5
+      },
+      "hideTimeOverride": false,
+      "id": 123,
+      "interval": "1h",
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "alias": "$tag_source",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"used_latest\") * (100 / last(\"capacity_latest\"))  FROM \"vsphere_datastore_disk\" WHERE (\"source\" =~ /^$datastore$/) AND $timeFilter GROUP BY time($inter) , \"source\"  fill(none)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": "3h",
+      "title": "Datastores - Usage Capacity",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Usage Average %",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 9
+      },
+      "id": 23,
+      "links": [],
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "$tag_clustername",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "cpu"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_cpu",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"usagemhz_average\") FROM \"vsphere_host_cpu\" WHERE (\"clustername\" =~ /^$clustername$/) AND $timeFilter GROUP BY time($inter), \"clustername\" fill(none)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cpu",
+              "operator": "=",
+              "value": "instance-total"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster CPU Usage %",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Usage Average %",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 6,
+        "y": 9
+      },
+      "id": 26,
+      "links": [],
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "$tag_clustername",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_mem",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"totalCapacity_average\") * (last(\"usage_average\")) / 100 * 1024 FROM \"vsphere_host_mem\" WHERE  (\"clustername\" =~ /^$clustername$/) AND $timeFilter GROUP BY time($inter), \"clustername\"  fill(none)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "vcenter",
+              "operator": "=~",
+              "value": "/^$vcenter$/"
+            },
+            {
+              "condition": "AND",
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster RAM Usage in %",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Usage Network MBps",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "KBs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "id": 90,
+      "links": [],
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "$tag_clustername - Received",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_net",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE \"esxhostname\" = ($esxi) AND $timeFilter GROUP BY time($inter), \"host\" fill(none)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bytesRx_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_clustername - Transmited",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_net",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE \"esxhostname\" = ($esxi) AND $timeFilter GROUP BY time($inter), \"host\" fill(none)",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bytesTx_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster Network Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_VSPHERE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ms",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 6,
+        "y": 14
+      },
+      "id": 91,
+      "links": [],
+      "options": {
+        "graph": {},
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "$tag_clustername - ReadAverage",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_storageAdapter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE \"esxhostname\" = ($esxi) AND $timeFilter GROUP BY time($inter), \"host\" fill(none)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalReadLatency_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_clustername - WriteAverage",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$inter"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "clustername"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "vsphere_host_storageAdapter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE \"esxhostname\" = ($esxi) AND $timeFilter GROUP BY time($inter), \"host\" fill(none)",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalWriteLatency_average"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "clustername",
+              "operator": "=~",
+              "value": "/^$clustername$/"
+            }
+          ]
+        }
+      ],
+      "title": "Cluster Storage Adapter",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 25,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "dark-green"
+                  },
+                  {
+                    "color": "dark-orange",
+                    "value": 65
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 0,
+            "y": 19
+          },
+          "hideTimeOverride": true,
+          "id": 34,
+          "links": [],
+          "maxPerRow": 6,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "10.0.3",
+          "repeat": "datastore",
+          "repeatDirection": "h",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "null"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_datastore_disk",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT mean(\"used_latest\") * (100 / mean(\"capacity_latest\"))  FROM \"vsphere_datastore_disk\" WHERE (\"source\" =~ /^$datastore$/) AND $timeFilter GROUP BY time($inter) fill(none)",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "used_latest"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "source",
+                  "operator": "=",
+                  "value": "ZEXT-NETAPP-01"
+                }
+              ]
+            }
+          ],
+          "timeFrom": "3h",
+          "title": "$datastore",
+          "type": "gauge"
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Datastore Status",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 20,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU Usage Avg. %",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 20
+          },
+          "id": 15,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [
+                "last",
+                "min",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_esxhostname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "esxhostname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_host_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT mean(\"usage_average\") FROM \"vsphere_host_cpu\" WHERE \"esxhostname\" = ($esxi) AND $timeFilter GROUP BY time($inter), \"host\" fill(none)",
+              "rawQuery": false,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "esxhostname",
+                  "operator": "=~",
+                  "value": "/^$esxi$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "cpu",
+                  "operator": "=",
+                  "value": "instance-total"
+                }
+              ]
+            }
+          ],
+          "title": "Hypervisor CPU",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Memory Usage Avg. %",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 20
+          },
+          "id": 16,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [
+                "last",
+                "min",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_esxhostname mem usage average",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "esxhostname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_host_mem",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "esxhostname",
+                  "operator": "=~",
+                  "value": "/^$esxi$/"
+                }
+              ]
+            }
+          ],
+          "title": "Hypervisor Memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "KBs"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 20
+          },
+          "id": 17,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [
+                "last",
+                "min",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_esxhostname net usage average",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "esxhostname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_host_net",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "esxhostname",
+                  "operator": "=~",
+                  "value": "/^$esxi$/"
+                }
+              ]
+            }
+          ],
+          "title": "Hypervisor Net Usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU Usage",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 20
+          },
+          "id": 19,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vcenter CPU",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vcenter"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vcenter",
+                  "operator": "=~",
+                  "value": "/^$vcenter$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "cpu",
+                  "operator": "=",
+                  "value": "instance-total"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_vcenter RAM",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vcenter"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_mem",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vcenter",
+                  "operator": "=~",
+                  "value": "/^$vcenter$/"
+                }
+              ]
+            }
+          ],
+          "title": "vCenter CPU/RAM",
+          "type": "timeseries"
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Hypervisor Status",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "influxdb",
+        "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 21,
+      "panels": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU Usage % per VM",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 21
+          },
+          "id": 14,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "cpu"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "cpu",
+                  "operator": "=",
+                  "value": "instance-total"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine CPU Usage in %",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Memory Usage Avg. %",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 21
+          },
+          "id": 13,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_mem",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine Memory Usage Avg.",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "CPU READY in ms",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 21
+          },
+          "hideTimeOverride": false,
+          "id": 10,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT mean(\"ready_summation\") FROM \"vsphere_vm_cpu\" WHERE (\"vmname\" =~ /^$virtualmachine$/) AND $timeFilter GROUP BY time($inter), \"vmname\" fill(none)",
+              "rawQuery": false,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ready_summation"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine CPU READY ms",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Net Usage Avg.",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "KBs"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 21
+          },
+          "id": 12,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vsphere_vm_net",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine Network Usage Avg (Kbps)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Block Read IOPS",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 28
+          },
+          "id": 3,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "limit": "",
+              "measurement": "vsphere_vm_virtualDisk",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "numberReadAveraged_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "slimit": "",
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine Disk Performance (Read VMFS Block IOPS)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Block Write IOPS",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 8,
+            "y": 28
+          },
+          "id": 18,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "limit": "",
+              "measurement": "vsphere_vm_virtualDisk",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "numberWriteAveraged_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "slimit": "",
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine Disk Performance (Write VMFS Block IOPS)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_VSPHERE}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "Block Latency Total",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 30,
+                "gradientMode": "hue",
+                "hideFrom": {
+                  "graph": false,
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 28
+          },
+          "id": 9,
+          "links": [],
+          "options": {
+            "graph": {},
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "limit": "",
+              "measurement": "vsphere_vm_virtualDisk",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "totalReadLatency_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "slimit": "",
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_vmname",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "${DS_VSPHERE}"
+              },
+              "dsType": "influxdb",
+              "groupBy": [
+                {
+                  "params": [
+                    "$inter"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "vmname"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "none"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "limit": "",
+              "measurement": "vsphere_vm_virtualDisk",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "totalWriteLatency_average"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "slimit": "",
+              "tags": [
+                {
+                  "key": "vmname",
+                  "operator": "=~",
+                  "value": "/^$virtualmachine$/"
+                }
+              ]
+            }
+          ],
+          "title": "Virtual Machine Disk Performance (Block Latency Total)",
+          "type": "timeseries"
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "da7054c0-ab52-42e9-9981-9eda39e0cdfd"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Virtual Machine Status",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "VMware",
+    "vSphere Overview",
+    "vSphere Telegraf"
+  ],
+  "templating": {
+    "list": [
+      {
+        "auto": true,
+        "auto_count": 100,
+        "auto_min": "20s",
+        "current": {
+          "selected": false,
+          "text": "auto",
+          "value": "$__auto_interval_inter"
+        },
+        "hide": 0,
+        "label": "Sampling",
+        "name": "inter",
+        "options": [
+          {
+            "selected": true,
+            "text": "auto",
+            "value": "$__auto_interval_inter"
+          },
+          {
+            "selected": false,
+            "text": "20s",
+            "value": "20s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "20s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_VSPHERE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "vCenter Server",
+        "multi": true,
+        "name": "vcenter",
+        "options": [],
+        "query": "select DISTINCT(\"vcenter\") from (select \"usage_average\",\"vcenter\" from \"vsphere_host_cpu\" WHERE $timeFilter)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_VSPHERE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Cluster",
+        "multi": true,
+        "name": "clustername",
+        "options": [],
+        "query": "select DISTINCT(\"clustername\") from (select \"usage_average\",\"clustername\" from \"vsphere_host_cpu\" WHERE $timeFilter AND \"vcenter\" =~ /$vcenter/)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_VSPHERE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "ESXi Server",
+        "multi": true,
+        "name": "esxi",
+        "options": [],
+        "query": "select DISTINCT(\"esxhostname\") from (select \"usage_average\",\"esxhostname\" from \"vsphere_host_cpu\" WHERE $timeFilter AND \"vcenter\" =~ /$vcenter/)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_VSPHERE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Datastore",
+        "multi": true,
+        "name": "datastore",
+        "options": [],
+        "query": "select DISTINCT(\"dsname\") from (select \"used_latest\",\"dsname\" from \"vsphere_datastore_disk\" WHERE $timeFilter AND \"vcenter\" =~ /$vcenter/)",
+        "refresh": 2,
+        "regex": "/^(?!VeeamBackup_)/",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": "",
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_VSPHERE}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "VM",
+        "multi": true,
+        "name": "virtualmachine",
+        "options": [],
+        "query": "select DISTINCT(\"vmname\") from (select \"ready_summation\",\"vmname\" from \"vsphere_vm_cpu\" WHERE $timeFilter AND \"vcenter\" =~ /$vcenter/)",
+        "refresh": 2,
+        "regex": "/^(?![a-zA-Z0-9-_]+_)/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "VMware vSphere  - Overview",
+  "uid": "kwtyVaAmz",
+  "version": 10,
+  "weekStart": ""
+}
