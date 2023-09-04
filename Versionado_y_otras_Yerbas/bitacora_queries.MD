@@ -1,6 +1,5 @@
 
 SELECT * FROM win_services WHERE "service_name"=~/SQL/  <---- Go Regex!!! =~/SQL/
-
 SELECT LAST(*) FROM win_services WHERE "service_name"=~/SQL/
 
 ########################
