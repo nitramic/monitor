@@ -1,0 +1,32 @@
+FROM telegraf as telegraf
+COPY ./scripts /etc/telegraf/
+COPY telegraf.conf /etc/telegraf/
+RUN apt update
+RUN apt upgrade -y
+# MODs por EOL de py2, se deberia instalar python2-dev tambien? se puede sumar 
+RUN apt install python2 -y
+# En la linea de abajo hago el listado para saber que versiones de py tengo instalada
+RUN ls -la /usr/bin/pyt*
+# En la linea de abajo quiero dejar por default a python 2.17 (Ver Notas seccion "2")
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+# ##OJO  con la linea anterior, py3 viene por defecto, aca tengo que instalar py y dejarlo por defecto para que funcione todo de una 
+# ---> Ver como dejar automatico el set de python2  RUN update-alternatives --config python 
+WORKDIR /etc/telegraf
+run python --version
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+RUN python get-pip.py
+# cambio en el proceso, es solo para ver la version --Comando viejo: RUN pip --version
+RUN python -m pip --version
+RUN python -m pip install -r requeriments.txt
+
+
+# ## Nota:
+# 1- Ver de bajar las librerias por si las "deprecan" en algun momento y no tener este problema, de ser posible py2 tambien.
+#    para hace la instalacion offline de las lirerias con pip
+#    https://stackoverflow.com/questions/11091623/how-to-install-packages-offline
+# 2- Las Mods para dejar a p v2 como default vienen del siguiente doc
+#    https://netslovers.com/post/how-install-python-27-pip-ubuntu-22-04/
+# 3- Otra cosa que noté es que se podria instalar pip2 desde apt? 
+# -> $ sudo apt install python2-pip-whl (Probar)
+
+# FUNCIONARA ?!?!?
